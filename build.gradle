@@ -38,6 +38,17 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.kafka:spring-kafka-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+	implementation 'com.google.zxing:core:3.5.2'
+	implementation 'com.google.zxing:javase:3.5.2'
+
+	// Для PDF
+	implementation 'org.apache.pdfbox:pdfbox:2.0.24'
+
+// Для Word
+	implementation 'org.apache.poi:poi:5.2.2' // Для работы с .xls и .doc файлов
+	implementation 'org.apache.poi:poi-ooxml:5.2.2'
+
 }
 
 tasks.named('test') {

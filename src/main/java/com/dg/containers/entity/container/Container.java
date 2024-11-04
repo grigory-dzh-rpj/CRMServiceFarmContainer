@@ -1,6 +1,7 @@
 package com.dg.containers.entity.container;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -20,10 +21,10 @@ public class Container {
 
     private String location;
 
+    private String hostIP;
 
     @OneToMany(mappedBy = "container", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<Rack> racks = new ArrayList<>();
-
-
 
 }
