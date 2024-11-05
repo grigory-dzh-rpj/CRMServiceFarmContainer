@@ -5,6 +5,9 @@ import com.dg.containers.dto.container.ContainerCreateRequest;
 import com.dg.containers.dto.container.PrintLabelsDTO;
 import com.dg.containers.entity.container.Container;
 import com.dg.containers.service.ContainerService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
@@ -23,6 +26,13 @@ public class ContainerController {
     private ContainerService containerService;
 
     @PostMapping
+    @Operation(summary = "Просто создаем контейнер и получаем его данные после создания и JSON с наклейками",
+            description = "Отправляем данные, создаем контейнер в базе и получаем наклейки.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Успешно"),
+            @ApiResponse(responseCode = "400", description = "Ошибка в предоставленных данных"),
+            @ApiResponse(responseCode = "500", description = "Ошибка сервера")
+    })
     public ResponseEntity<?> createContainer(@RequestBody ContainerCreateRequest request) {
         Container container = containerService.createContainer(
                 request.getName(),
@@ -42,6 +52,13 @@ public class ContainerController {
 
 
     @PostMapping("/createContainerExcel")
+    @Operation(summary = "Создать контейнер и получить Excel -file с QR кодами для расклейки",
+            description = "Отправляем данные, создаем контейнер в базе и получаем наклейки.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Успешно"),
+            @ApiResponse(responseCode = "400", description = "Ошибка в предоставленных данных"),
+            @ApiResponse(responseCode = "500", description = "Ошибка сервера")
+    })
     public ResponseEntity<?> createContainerPDF(@RequestBody ContainerCreateRequest request) {
         Container container = containerService.createContainer(
                 request.getName(),
@@ -65,6 +82,13 @@ public class ContainerController {
 
 
     @GetMapping("/{name}/labels")
+    @Operation(summary = "Получаем наклейки созданного контейнера по имени контейнера",
+            description = "Отправляем данные, получаем наклейки.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Успешно"),
+            @ApiResponse(responseCode = "400", description = "Ошибка в предоставленных данных"),
+            @ApiResponse(responseCode = "500", description = "Ошибка сервера")
+    })
     public ResponseEntity<?> getContainerLabels(@PathVariable String name) {
         try {
             Container container = containerService.findByName(name);

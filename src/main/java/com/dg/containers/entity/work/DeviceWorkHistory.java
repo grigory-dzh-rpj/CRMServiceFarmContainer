@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "container_work")
+@Table(name = "device_work")
 @Data
 public class DeviceWorkHistory {
 
@@ -18,13 +18,7 @@ public class DeviceWorkHistory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "cell_id")
-    private Cell cell;
-
     private String date;
-
-    private String status;
 
     private String startTime;
 
@@ -40,7 +34,7 @@ public class DeviceWorkHistory {
     @OneToMany(mappedBy = "deviceWorkHistory", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<DetailWork> details = new ArrayList<>();
 
-    private String userId;
+    private String user;
 
 
 

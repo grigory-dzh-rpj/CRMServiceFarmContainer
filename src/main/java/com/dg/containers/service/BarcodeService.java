@@ -23,23 +23,19 @@ import java.util.Map;
 public class BarcodeService {
 
 
-
     public String generateBarcode(String serialNumber) {
         try {
-            // Создаем матрицу штрих-кода
             MultiFormatWriter writer = new MultiFormatWriter();
             BitMatrix bitMatrix = writer.encode(
                     serialNumber,
-                    BarcodeFormat.CODE_128,  // или BarcodeFormat.QR_CODE для QR-кода
-                    200,   // ширина
-                    100    // высота
+                    BarcodeFormat.CODE_128,
+                    200,
+                    100
             );
 
-            // Создаем BufferedImage
             MatrixToImageWriter.toBufferedImage(bitMatrix);
             BufferedImage image = MatrixToImageWriter.toBufferedImage(bitMatrix);
 
-            // Конвертируем в Base64
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ImageIO.write(image, "PNG", baos);
             byte[] imageBytes = baos.toByteArray();
@@ -58,8 +54,8 @@ public class BarcodeService {
             BitMatrix bitMatrix = writer.encode(
                     serialNumber,
                     BarcodeFormat.QR_CODE,
-                    400,   // ширина
-                    400    // высота
+                    400,
+                    400
             );
 
             BufferedImage image = MatrixToImageWriter.toBufferedImage(bitMatrix);
@@ -78,16 +74,16 @@ public class BarcodeService {
 
     public String generateQRCodeWithLabel(String serialNumber, int cellNumber) {
         try {
-            // Создание QR-кода
+
             QRCodeWriter writer = new QRCodeWriter();
             BitMatrix bitMatrix = writer.encode(
-                    serialNumber, // Используем только серийный номер в QR-коде
+                    serialNumber,
                     BarcodeFormat.QR_CODE,
-                    200,   // ширина
-                    200    // высота
+                    200,
+                    200
             );
 
-            // Преобразуем в изображение
+
             BufferedImage qrImage = MatrixToImageWriter.toBufferedImage(bitMatrix);
 
             // Создаем новое изображение для наклейки

@@ -13,8 +13,10 @@ public class DetailWork {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
-    private TypeWork typeWork;
+    private String nameWork;
+
+    private String description;
+
 
     @ManyToOne
     @JoinColumn(name = "device_history_id")

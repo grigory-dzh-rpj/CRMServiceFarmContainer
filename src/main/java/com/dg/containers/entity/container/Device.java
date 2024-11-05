@@ -18,7 +18,7 @@ public class Device {
 
     private String serialNumber;
 
-    private String modelPlat;
+    private String deviceName;
 
     private String ip;
 

@@ -13,9 +13,6 @@ public class TypeWork {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nameTypeWork;
+    private String nameWork;
 
-
-    //formatter HH:mm:ss
-    private String norm;
 }
