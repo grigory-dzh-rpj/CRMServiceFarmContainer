@@ -7,6 +7,7 @@ import com.dg.containers.repository.container.DeviceRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class DeviceService {
@@ -22,6 +23,7 @@ public class DeviceService {
         return deviceRepository.save(device);
     }
 
+    @Transactional
     public void attachDeviceToCell(String snDevice, String snCell) {
         Device device = deviceRepository.findBySerialNumber(snDevice)
                 .orElseThrow(() -> new EntityNotFoundException("Device not found"));
@@ -43,7 +45,7 @@ public class DeviceService {
     }
 
 
-
+    @Transactional
     public void detachDeviceFromCell(String snDevice) {
         Device device = deviceRepository.findBySerialNumber(snDevice)
                 .orElseThrow(() -> new EntityNotFoundException("Device not found"));

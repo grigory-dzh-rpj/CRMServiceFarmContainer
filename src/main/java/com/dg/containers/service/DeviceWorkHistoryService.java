@@ -8,6 +8,7 @@ import com.dg.containers.repository.work.DeviceWorkHistoryRepository;
 import com.dg.containers.utils.DateTimeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -35,6 +36,7 @@ public class DeviceWorkHistoryService {
 
     private Map<String, Device> cacheMapWorkDevice = new HashMap<>();
 
+    @Transactional
     public void startWork(String snDevice, String authorName){
         Device device = deviceService.findBySerialNumber(snDevice);
 
@@ -49,7 +51,7 @@ public class DeviceWorkHistoryService {
 
     }
 
-
+    @Transactional
     public void finishWork(String snDevice, List<DetailWork> detailWorkList) {
         Device device = cacheMapWorkDevice.get(snDevice);
 
@@ -78,7 +80,8 @@ public class DeviceWorkHistoryService {
         }
     }
 
-    private void completeWorkHistory(DeviceWorkHistory workHistory, List<DetailWork> details) {
+    @Transactional
+    public void completeWorkHistory(DeviceWorkHistory workHistory, List<DetailWork> details) {
         workHistory.setEndTime(LocalTime.now().format(TIME_FORMATTER));
 
         for (DetailWork detail : details) {

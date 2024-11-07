@@ -18,6 +18,7 @@ import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -38,6 +39,7 @@ public class ContainerService {
     private BarcodeService barcodeService;
 
 
+    @Transactional
     public Container createContainer(String name, String location, String hostIP,
                                      int numberOfRacks, int numberOfCellsPerRack) {
         Container container = new Container();
